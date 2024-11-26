@@ -17,15 +17,17 @@ const MovieCard: React.FC<MovieCardProps> = ({
   year,
 }) => {
   return (
-    <div className="p-4 border rounded-lg shadow-lg movie-card fade-in scale-up hover:scale-up">
-      <Link to={`/movie/${imdbID}`}>
+    <div className="p-4 border border-stone-800 rounded-lg bg-stone-800 shadow-lg movie-card fade-in scale-up hover:scale-up">
+      <Link to={`/movie/${imdbID}`} className="no-underline text-rose-700">
         <img
-          src={poster}
+          src={
+            poster && poster !== "N/A" ? poster : "https://picsum.photos/200"
+          }
           alt={title}
           className="w-full h-60 object-cover mb-4"
         />
-        <h3 className="text-lg font-semibold">{title}</h3>
-        <p>{year}</p>
+        <h3 className="text-lg font-semibold mb-2">{title}</h3>
+        <p className="mb-2">{year}</p>
         <p>IMDB ID: {imdbID}</p>
       </Link>
     </div>

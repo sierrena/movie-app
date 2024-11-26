@@ -135,10 +135,9 @@ const Home = () => {
           </SelectContent>
         </Select>
       </div>
-
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {isLoading ? (
-          <div className="flex justify-center items-center w-full h-full">
+          <div className="fixed inset-0 flex justify-center items-center">
             <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
           </div>
         ) : movies.length === 0 ? (
@@ -151,7 +150,11 @@ const Home = () => {
               key={movie.imdbID}
               imdbID={movie.imdbID}
               title={movie.Title}
-              poster={movie.Poster}
+              poster={
+                movie.Poster && movie.Poster !== "N/A"
+                  ? movie.Poster
+                  : "https://picsum.photos/200"
+              }
               year={movie.Year}
             />
           ))
@@ -162,7 +165,7 @@ const Home = () => {
         <button
           onClick={() => handlePageChange(page - 1)}
           disabled={page === 1}
-          className="p-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300"
+          className="p-2 bg-rose-700 text-white rounded-lg disabled:bg-gray-600"
         >
           Previous
         </button>
@@ -182,7 +185,7 @@ const Home = () => {
         <button
           onClick={() => handlePageChange(page + 1)}
           disabled={page * 10 >= totalResults}
-          className="p-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300"
+          className="p-2 bg-rose-700 text-white rounded-lg disabled:bg-gray-600"
         >
           Next
         </button>
